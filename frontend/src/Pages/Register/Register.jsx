@@ -1,15 +1,18 @@
 import axios from "axios";
 import React from "react";
+import api from "../../api";
+import { useNavigate } from "react-router-dom";
 
 const Register = ()=>{
     const [username, setUsername] = React.useState("");
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
+    const navigate = useNavigate();
 
     const registerHandler = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post('http://localhost:3000/api/auth/register', {
+            const res = await api.post('/auth/register', {
                 username,
                 email,
                 password
@@ -22,6 +25,20 @@ const Register = ()=>{
             } else {
                 console.error("Registration failed:", res.message);
                 setPassword("");
+            }
+            //Registration step is just for registering the user in database this does not mean the user is logged in.
+            //So lets make the user logged in here itself by implementing login functionality.
+            //We can do this by calling the login API with the same credentials.
+            const loginRes = await api.post('/auth/login',{
+                username,
+                password
+            });
+            if(loginRes.status === 200){
+                console.log("Login Successful");
+                //Storing token in localStorage
+                localStorage.setItem("accessToken", loginRes.data.accessToken);
+                //Redirecting to home page after successful registration and login
+                navigate("/home");
             }
         } catch (error) {
             console.log("Error in registration:", error);
