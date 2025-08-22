@@ -6,6 +6,7 @@ import App from './App.jsx';
 import Login from './Pages/login/login.jsx';
 import Register from './Pages/Register/Register.jsx';
 import Home from './Pages/Home/Home.jsx';
+import CategoryProducts from './Pages/CategoryProducts/CategoryProducts.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -15,6 +16,7 @@ createRoot(document.getElementById('root')).render(
             <Route path="/login" element={<Login />}/>
             <Route path="/register" element={<Register />}/>
             <Route path="/home" element={<Home />}/>
+            <Route path='/products/category/:category' element={<CategoryProducts />} />
         </Routes>
     </BrowserRouter>
   </StrictMode>,

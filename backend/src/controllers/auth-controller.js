@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 
 const registerUser = async (req, res) => {
     try {
-        const { username, email, password } = req.body;
+        const { username, email, password , role } = req.body;
         // Check if user already exists
         const doExist = await User.findOne({ $or: [{ username }, { email }] });
         if (doExist) {
@@ -21,7 +21,10 @@ const registerUser = async (req, res) => {
         //Hashing password:
         const hashedPassword = await bcrypt.hash(password, salt);
         // Create new user
-        const newUser = new User({username, email, password: hashedPassword});
+        if(!role) {
+            req.body.role = 'user'; // Default role if not provided
+        }
+        const newUser = new User({username, email, password: hashedPassword , role});
         await newUser.save();
         res.status(201).json({ 
             message: 'User registered successfully',
@@ -36,7 +39,7 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
     try {
         const { username, password } = req.body;
-        const checkUser = await User.findOne({ username });
+        const checkUser = await User.findOne({ username : username });
         if (!checkUser) {
             return res.status(400).json({ message: 'No such user exists' });
         }

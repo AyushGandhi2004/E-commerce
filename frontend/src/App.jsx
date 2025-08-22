@@ -7,9 +7,9 @@ import Register from "./Pages/Register/Register";
 
 const App = () => {
   return (
-    <div className="h-screen flex flex-col justify-center items-center">
+    <div className="h-screen flex flex-col justify-center w-full">
       {/* <h2>E-commerce</h2> */}
-      <Register />
+      <Home />
       
     </div>
   );
