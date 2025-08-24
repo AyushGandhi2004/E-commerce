@@ -14,7 +14,7 @@ const CategoryProducts = () => {
     useEffect(()=>{
         const fetchProducts = async ()=>{
             try {
-                const response = await api.get(`/products/category/${category}`);
+                const response = await api.get(`/product/category/${category}`);
                 if(response.status === 200){
                     setProducts(response.data.products);
                 }else{
@@ -35,15 +35,12 @@ const CategoryProducts = () => {
 
     return (
         <div className="flex flex-col justify-center items-center w-full h-screen">
-            <NavBar />;
+            
             <h1 className="text-2xl font-bold mt-4">Products in {category} Category</h1>
-            <div className="grid grid-cols-3 gap-4 p-4 w-full">
+            <div className="grid grid-cols-3 gap-4 p-4 w-full h-full">
                 {
                     products.map((product) => {
-                        <ProductCard 
-                            key={product._id} 
-                            product={product}
-                        />
+                        return <ProductCard key={product._id} product={product}/>
                     })
                 }
             </div>

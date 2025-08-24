@@ -1,40 +1,43 @@
-import React from "react";
-import NavBar from "../../components/NavBar/nav";
-import SearchBar from "../../components/search bar/search";
-import Banner from "../../components/Banner/banner";
-import CategoryCard from "../../components/categoryCard/CategoryCard";
+
+import React from 'react';
+import SearchBar from '../../components/search bar/search';
+import Banner from '../../components/Banner/banner';
+import CategoryCard from '../../components/categoryCard/CategoryCard';
 
 const categories = [
-    {name : "electronics" , image : "/electronicsCatgory.jpeg"},
-    {name : "fashion" , image : "/fashionCategory.jpeg"},
-    {name : "home", image : "/homeCategory.jpg"},
-    {name : "beauty", image : "/beautyCategory.jpeg"},
-    {name : "sports", image : "/sportsCategory.jpeg"},
-    {name : "books", image : "/booksCategory.png"}
-]
+    { name: "Electronics", image: "/electronicsCategory.jpeg" },
+    { name: "Fashion", image: "/fashionCategory.jpeg" },
+    { name: "Home", image: "/homeCategory.jpg" },
+    { name: "Beauty", image: "/beautyCategory.jpeg" },
+    { name: "Sports", image: "/sportsCategory.jpeg" },
+    { name: "Books", image: "/booksCategory.png" }
+];
 
 const Home = () => {
-    
-    return(
-        <div className="flex flex-col justify-center w-full h-screen">
-            <header className="w-full align-top">
-                <NavBar />
-            </header>
-            
+    return (
+        <div>
             <Banner />
             <SearchBar />
-            <p className="flex justify-center center">
-                One Stop Solution For All Your Needs:
-            </p>
-            <div className="flex flex-wrap justify-center items-center gap-4 p-4">
-                <div className="grid grid-cols-3 gap-4 justify-around w-full ">
-                    {categories.map((category ) => (
-                        <CategoryCard key={category.name}  name={category.name} image = {category.image} />
+
+            {/* This section is the key. 'container mx-auto' gives it proper width. */}
+            <section className="container mx-auto px-4 py-12" id="categories">
+                <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
+                    Shop by Category
+                </h2>
+                
+                {/* This grid will now have space to create 3 columns */}
+                <div className="grid grid-cols-3 gap-8">
+                    {categories.map((category) => (
+                        <CategoryCard
+                            key={category.name}
+                            name={category.name}
+                            image={category.image}
+                        />
                     ))}
                 </div>
-            </div>
+            </section>
         </div>
-    )
-}
+    );
+};
 
 export default Home;

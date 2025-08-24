@@ -1,22 +1,48 @@
-import React from "react";
-import "./nav.css";
+// Nav.jsx
 
-const NavBar = () =>{
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+const NavBar = () => {
     return (
-        <nav className="w-full shadow-md top-0 left-0 bg-white z-50 flex justify-between sticky">
-            <div className="">
-                {/* <img src="/logo.png" alt="logo" className="h-10 w-10"/> */}
-                <a href="/home" className="text-xl font-bold text-gray-800">E-commerce</a>
+        <nav className="bg-white shadow-md sticky top-0 z-50 justify-between">
+            <div className="container mx-auto px-4 py-4 flex justify-between items-left w-[70%]">
+                
+                {/* Brand Logo */}
+                <Link to="/" className="text-2xl font-bold text-blue-600">
+                    E-commerce
+                </Link>
+
+                {/* Desktop Menu - 'hidden' class removed */}
+                <div className="flex justify-around items-center space-x-8 text-lg w-[30%]">
+                    <Link 
+                        to="/" 
+                        className="text-gray-600 hover:text-blue-500 transition-colors"
+                    >
+                        Home
+                    </Link>
+                    <Link 
+                        to="/wishlist" 
+                        className="text-gray-600 hover:text-blue-500 transition-colors"
+                    >
+                        Wishlist
+                    </Link>
+                    <Link 
+                        to="/cart" 
+                        className="text-gray-600 hover:text-blue-500 transition-colors"
+                    >
+                        Cart
+                    </Link>
+                    <Link 
+                        to="/login" 
+                        className="text-gray-600 hover:text-blue-500 transition-colors"
+                    >
+                        Login
+                    </Link>
+                </div>
             </div>
-            <div className="flex justify-between grid grid-cols-4 w-1/3 gap-4">
-                <a href="/home" className="cursor-pointer flex justify-centre text-gray-800">Home</a>
-                <a href="/cart" className="cursor-pointer flex justify-centre text-gray-800">Cart</a>
-                <a href="/wishlist" className="cursor-pointer flex justify-centre text-gray-800">Wishlist</a>
-                <a href="/login" className="cursor-pointer flex justify-centre text-gray-800">Login</a>
-            </div>
-            
         </nav>
-    )
-}
+    );
+};
 
 export default NavBar;

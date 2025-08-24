@@ -30,7 +30,7 @@ const Login = ()=>{
 
             setUsername("");
             setPassword("");
-            navigate("/home");
+            navigate("/");
         } catch (error) {
             console.error("Incorrect Password:", error);
             setPassword("");
@@ -49,6 +49,7 @@ const Login = ()=>{
                 <input type="password" placeholder="Password" value={password} onChange={(e)=> setPassword(e.target.value)} />
                 <button type="submit" className="mb-10 pb-10">Login</button>
             </form>
+            <a href="/Register">New to E-commerce...SignUp</a>
         </div>
     )
 };

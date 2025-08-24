@@ -22,7 +22,8 @@ const Register = ()=>{
                 setUsername("");
                 setEmail("");
                 setPassword("");
-            } else {
+            } 
+            else {
                 console.error("Registration failed:", res.message);
                 setPassword("");
             }
@@ -38,9 +39,14 @@ const Register = ()=>{
                 //Storing token in localStorage
                 localStorage.setItem("accessToken", loginRes.data.accessToken);
                 //Redirecting to home page after successful registration and login
-                navigate("/home");
+                navigate("/");
             }
         } catch (error) {
+            if(error.status === 400){
+                console.error("User  already exists");
+                setPassword("");
+                navigate("/login");
+            }
             console.log("Error in registration:", error);
             setPassword("");
         }
