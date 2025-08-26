@@ -9,8 +9,8 @@ const Cart = ()=>{
         const fetchCartItems = async () =>{
             try {
                 const response = await api.get('/cart');
-                console.log(response.data)
-;                setCartItems(response.data.cart.items);
+                console.log(response.data);
+                setCartItems(response.data.cart.items);
             } catch (error) {
                 console.log(error);
             }

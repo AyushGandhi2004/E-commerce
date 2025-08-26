@@ -66,4 +66,33 @@ const getProductsByCategory = async (req,res) =>{
     }
 }
 
-module.exports = { insertProducts, getAllProducts, getProductById, deleteProductById, getProductsByCategory };
+const updateProductById = async (req,res) => {
+    try {
+        const productId = req.params.id;
+        const updateData = req.body;
+        const updatedProduct = await Product.findByIdAndUpdate(productId, updateData, { new: true });
+        if(!updatedProduct){
+            return res.status(404).json({ message: "Product not found" });
+        }
+        res.status(200).json({ message: "Product updated successfully", product: updatedProduct });
+    } catch (error) {
+        console.log(error, "Error in updateProductById");
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+};
+
+const deleteMultipleProducts = async (req,res) => {
+    try {
+        const { productIds} = req.body; //array of ids
+        if (!Array.isArray(productIds) || productIds.length === 0) {
+            return res.status(400).json({ message: "Invalid array of product IDs" });
+        }
+        await Product.deleteMany({_id : { $in : productIds}});
+        res.status(200).json({ message: "Products deleted successfully" });
+    } catch (error) {
+        console.log(error, "Error in deleteMultipleProducts");
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+};
+
+module.exports = { insertProducts, getAllProducts, getProductById, deleteProductById, getProductsByCategory, updateProductById, deleteMultipleProducts };
