@@ -19,24 +19,21 @@ import { Link } from 'react-router-dom';
 
 const CategoryCard = ({ name, image }) => {
     return (
-        // 1. The <Link> is now the main component.
-        //    'block' makes the link behave like a div.
+        
         <Link
             to={`/products/category/${name}`}
             className="relative block rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden group"
         >
-            {/* The image and text are now children of the link */}
             <div className="h-64 w-full">
                 <img
                     src={image}
                     alt={name}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110 opacity-70"
                 />
             </div>
 
-            {/* The text overlay remains the same */}
-            <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40">
-                <h3 className="text-white text-2xl font-bold drop-shadow-md">{name}</h3>
+            <div className="absolute inset-0 flex items-center justify-center bg-opacity-40">
+                <h3 className="text-shadow-gray-800 text-2xl font-bold drop-shadow-md">{name}</h3>
             </div>
         </Link>
     );

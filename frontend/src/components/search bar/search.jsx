@@ -4,7 +4,7 @@ import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
 const SearchBar = () => {
     return (
-        <div className="bg-white py-8">
+        <div className="p-8 m-5">
             <div className="container mx-auto px-4">
                 <div className="flex relative max-w-2xl mx-auto">
                     <input

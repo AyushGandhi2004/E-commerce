@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import api from "../../api";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Register = ()=>{
     const [username, setUsername] = React.useState("");
@@ -54,16 +55,17 @@ const Register = ()=>{
 
 
     return (
-        <div className="flex flex-col justify-center items-center">
-            <div>
+        <div className="flex flex-col justify-center items-center align-middle h-screen w-full">
+            <div className="m-3">
                 <h2>E-commerce</h2>
             </div>
-            <form className="flex flex-col" onSubmit={registerHandler}>
-                <input type="text" placeholder="Username" value={username} onChange={(e)=> setUsername(e.target.value)}/>
-                <input type="email" placeholder="Email" value={email} onChange={(e)=> setEmail(e.target.value)} />
-                <input type="password" placeholder="Password" value={password} onChange={(e)=> setPassword(e.target.value)} />
-                <button type="submit">Register</button>
+            <form className="flex flex-col justify-between items-center mb-3 outline-1 rounded-2xl p-4" onSubmit={registerHandler}>
+                <input type="text" placeholder="Username" value={username} onChange={(e)=> setUsername(e.target.value)} className="m-3 outline-1 rounded-md p-1 "/>
+                <input type="email" placeholder="Email" value={email} onChange={(e)=> setEmail(e.target.value)} className="m-3 outline-1 rounded-md p-1 " />
+                <input type="password" placeholder="Password" value={password} onChange={(e)=> setPassword(e.target.value)} className="m-3 outline-1 rounded-md p-1 "/>
+                <button type="submit" className="bg-blue-500 text-white rounded-full px-5 py-1 shadow-md">Register</button>
             </form>
+            <Link to='/login' className="text-blue-500">Already a User...LogIn</Link>
         </div>
     )
 };

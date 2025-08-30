@@ -40,16 +40,16 @@ const Login = ()=>{
 
 
     return (
-        <div className="flex flex-col justify-center items-center h-screen mb-20">
-            <div className="mb-10">
+        <div className="flex flex-col justify-center items-center h-screen ">
+            <div className="m-3">
                 <h1>E-commeerce</h1>
             </div>
-            <form className="flex flex-col space-y-4 mb-20" onSubmit={handleSubmit}>
-                <input type="text" placeholder="Username" value={username} onChange={(e)=> setUsername(e.target.value)} />
-                <input type="password" placeholder="Password" value={password} onChange={(e)=> setPassword(e.target.value)} />
-                <button type="submit" className="mb-10 pb-10">Login</button>
+            <form className="flex flex-col justify-between items-center mb-3 outline-1 rounded-2xl p-4" onSubmit={handleSubmit}>
+                <input type="text" placeholder="Username" value={username} onChange={(e)=> setUsername(e.target.value)} className="m-3 outline-1 rounded-md p-1 "/>
+                <input type="password" placeholder="Password" value={password} onChange={(e)=> setPassword(e.target.value)} className="m-3 outline-1 rounded-md p-1 "/>
+                <button type="submit" className="bg-blue-500 text-white rounded-full px-5 py-1 shadow-md">Login</button>
             </form>
-            <a href="/Register">New to E-commerce...SignUp</a>
+            <a href="/Register" className="text-blue-500">New to E-commerce...SignUp</a>
         </div>
     )
 };

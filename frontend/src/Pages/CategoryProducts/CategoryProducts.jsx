@@ -37,7 +37,7 @@ const CategoryProducts = () => {
         <div className="flex flex-col justify-center items-center w-full h-screen">
             
             <h1 className="text-2xl font-bold mt-4">Products in {category} Category</h1>
-            <div className="grid grid-cols-3 gap-4 p-4 w-full h-full">
+            <div className="grid grid-cols-4 gap-4 p-4 w-full h-full">
                 {
                     products.map((product) => {
                         return <ProductCard key={product._id} product={product}/>

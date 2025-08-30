@@ -3,14 +3,16 @@ import api from "../../api";
 import ProductCard from "../../Components/ProductCard/ProductCard";
 
 const Cart = ()=>{
-    const [cartItems, setCartItems] = useState([]);
+    const [cartItemsIds, setCartItemsIds] = useState([]);
+    const [available,setAvailable] = useState(false);
 
     useEffect(()=>{
         const fetchCartItems = async () =>{
             try {
                 const response = await api.get('/cart');
-                console.log(response.data);
-                setCartItems(response.data.cart.items);
+                //console.log(response.data.cart.items);
+                setCartItemsIds(response.data.cart.items);
+                
             } catch (error) {
                 console.log(error);
             }
@@ -18,15 +20,19 @@ const Cart = ()=>{
         fetchCartItems();
     },[]);
 
+
+    if(cartItemsIds.length===0) return <div> Your cart is empty</div>
+
     return(
-        <div>
-            <h1>My Cart</h1>
-            <div className="grid grid-cols-3 gap-4 p-4 w-full h-full">
+        <div className="flex flex-col justify-center items-center w-full h-screen">
+            <h1 className="text-3xl text-gray-800">My Cart</h1>
+            <div className="grid grid-cols-4 gap-4 p-4 w-full h-full">
                 {
-                    cartItems.length === 0 ? <p>Your Cart Is Empty</p>:
-                    cartItems.map((item)=>{
+                    cartItemsIds.map((item)=>{
+            
+                        
                         return(
-                            <ProductCard key={item._id} product = {item}/>
+                            <ProductCard key={item.productId._id} product = {item.productId}/>
                         )
                     })
                 }
