@@ -1,10 +1,12 @@
 import axios from "axios";
-import React from "react";
+import React, { useContext } from "react";
 import api from "../../api";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../context/User";
 
 const Register = ()=>{
+    const {user,setUser} = useContext(UserContext);
     const [username, setUsername] = React.useState("");
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
@@ -31,14 +33,15 @@ const Register = ()=>{
             //Registration step is just for registering the user in database this does not mean the user is logged in.
             //So lets make the user logged in here itself by implementing login functionality.
             //We can do this by calling the login API with the same credentials.
-            const loginRes = await api.post('/auth/login',{
-                username,
-                password
-            });
+            const loginRes = await api.post('/auth/login',
+                { username,password },
+                { withCredentials : true }
+            );
             if(loginRes.status === 200){
                 console.log("Login Successful");
+                setUser(true);
                 //Storing token in localStorage
-                localStorage.setItem("accessToken", loginRes.data.accessToken);
+                //localStorage.setItem("accessToken", loginRes.data.accessToken);
                 //Redirecting to home page after successful registration and login
                 navigate("/");
             }
@@ -46,6 +49,7 @@ const Register = ()=>{
             if(error.status === 400){
                 console.error("User  already exists");
                 setPassword("");
+                setUser(false);
                 navigate("/login");
             }
             console.log("Error in registration:", error);

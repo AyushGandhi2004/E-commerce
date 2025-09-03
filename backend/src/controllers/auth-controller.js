@@ -51,13 +51,16 @@ const loginUser = async (req, res) => {
         // Create JWT token
         const accessToken = jwt.sign(
             { userId: checkUser._id, username: checkUser.username, role : checkUser.role },
-            process.env.JWT_SECRET,
-            { expiresIn: '1h' }
+            process.env.JWT_SECRET
         );
+        //setting cookie in res:
+        res.cookie("accessToken",accessToken,{
+            httpOnly : true,
+        })
+
         res.status(200).json({
             message : "Login successful",
-            user : checkUser,
-            accessToken
+            user : checkUser
         });
 
     } catch (error) {
@@ -66,4 +69,41 @@ const loginUser = async (req, res) => {
     }
 };
 
-module.exports = {registerUser , loginUser};
+const logoutUser = async (req,res)=>{
+    try {
+        res.clearCookie("accessToken",{
+            httpOnly : true,
+            secure : false
+        });
+        return res.status(200).json({message : "Logges out successfully"})
+    } catch (error) {
+        console.log('Error in logoutUser:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+const checkLogin = async (req, res) => {
+  try {
+    const user = req.userInfo; 
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: "Not authenticated",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      user, // send user info to frontend
+    });
+  } catch (error) {
+    console.error("Error in checkLogin:", error);
+    res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};
+
+
+module.exports = {registerUser , loginUser , logoutUser , checkLogin};

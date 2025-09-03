@@ -1,24 +1,28 @@
-import React from "react";
+import React, { useContext } from "react";
 import axios from "axios";
 import api from "../../api"
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/User";
 
 
 const Login = ()=>{
+    const {user , setUser} = useContext(UserContext);
     const [username, setUsername] = React.useState("");
     const [password, setPassword] = React.useState("");
     const navigate = useNavigate();
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await api.post('/auth/login', {
-                username,
-                password
-            })
+            const res = await api.post('/auth/login', 
+                { username , password },
+                { withCredentials: true }
+            )
             if(res.status === 200){
                 console.log("Login successful:", res.data);
+                setUser(true);
             }else{
                 console.error("Login failed:", res.message);
+                setUser(false);
             }
             //lets store the token in localStorage as of now but storing it in cookies is more secure.
             //we receive the response form the login controller as:
@@ -26,7 +30,7 @@ const Login = ()=>{
             //    message : "Login successful",
             //    user : checkUser,
             //    accessToken : "JWT_TOKEN_STRING"
-            localStorage.setItem("accessToken", res.data.accessToken);
+            // localStorage.setItem("accessToken", res.data.accessToken);
 
             setUsername("");
             setPassword("");
@@ -34,6 +38,7 @@ const Login = ()=>{
         } catch (error) {
             console.error("Incorrect Password:", error);
             setPassword("");
+            setUser(false);
         }
     };
 

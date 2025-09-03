@@ -4,6 +4,8 @@ const cors = require('cors');
 require('dotenv').config();
 const connectToDatabase = require('./database/db');
 const e = require('express');
+const cookieParser = require("cookie-parser");
+
 
 // Importing routes
 const authRoutes = require('./routes/auth-routes');
@@ -13,11 +15,16 @@ const wishlistRoutes = require('./routes/wishlist-routes');
 
 const app = express();
 connectToDatabase();
+//using cookies:
+app.use(cookieParser());
 
 //Using middlewares:
 app.use(express.json());
 
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:5173", // frontend URL
+  credentials: true               // allow cookies
+}));
 //routing API calls:
 app.use('/api/auth', authRoutes);
 app.use('/api/product', productRoutes);
