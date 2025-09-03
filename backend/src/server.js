@@ -21,10 +21,13 @@ app.use(cookieParser());
 //Using middlewares:
 app.use(express.json());
 
+const cors = require("cors");
+
 app.use(cors({
-  origin: "https://e-commerce-w29i.onrender.com/", // frontend URL
-  credentials: true               // allow cookies
+  origin: "https://e-commerce-frontend-sloj.onrender.com",
+  credentials: true
 }));
+
 //routing API calls:
 app.use('/api/auth', authRoutes);
 app.use('/api/product', productRoutes);
