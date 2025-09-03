@@ -55,7 +55,9 @@ const loginUser = async (req, res) => {
         );
         //setting cookie in res:
         res.cookie("accessToken",accessToken,{
-            httpOnly : true,
+            httpOnly: true,
+            secure: true,       // must be true on HTTPS (Render gives HTTPS)
+            sameSite: "None",   // allow cross-site cookies (frontend + backend are diff domains)
         })
 
         res.status(200).json({
@@ -71,9 +73,10 @@ const loginUser = async (req, res) => {
 
 const logoutUser = async (req,res)=>{
     try {
-        res.clearCookie("accessToken",{
-            httpOnly : true,
-            secure : false
+        res.clearCookie("accessToken",accessToken,{
+            httpOnly: true,
+            secure: true,       // must be true on HTTPS (Render gives HTTPS)
+            sameSite: "None",   // allow cross-site cookies (frontend + backend are diff domains)
         });
         return res.status(200).json({message : "Logges out successfully"})
     } catch (error) {
