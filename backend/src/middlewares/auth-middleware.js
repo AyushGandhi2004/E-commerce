@@ -9,6 +9,8 @@ const authMiddleware = (req, res, next) => {
     //if token stored in cookie :
     const token = req.cookies.accessToken;
     //If token is not present return error:
+    console.log(token);
+    
     if(!token) {
         return res.status(401).json({ message: 'Access token is missing' });
     }
