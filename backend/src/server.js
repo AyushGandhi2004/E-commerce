@@ -22,7 +22,7 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.use(cors({
-  origin: "http://localhost:5173", // frontend URL
+  origin: "https://e-commerce-w29i.onrender.com/", // frontend URL
   credentials: true               // allow cookies
 }));
 //routing API calls:
