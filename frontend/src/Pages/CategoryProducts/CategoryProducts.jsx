@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import NavBar from "../../components/NavBar/nav";
 import { useParams } from "react-router-dom";
 import api from "../../api";
-import ProductCard from "../../Components/ProductCard/ProductCard";
+import ProductCard from "../../components/ProductCard/ProductCard";
 
 const CategoryProducts = () => {
     const {category} = useParams();
