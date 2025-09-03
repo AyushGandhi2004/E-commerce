@@ -73,7 +73,7 @@ const loginUser = async (req, res) => {
 
 const logoutUser = async (req,res)=>{
     try {
-        res.clearCookie("accessToken",accessToken,{
+        res.clearCookie("accessToken",{
             httpOnly: true,
             secure: true,       // must be true on HTTPS (Render gives HTTPS)
             sameSite: "None",   // allow cross-site cookies (frontend + backend are diff domains)
