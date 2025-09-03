@@ -22,10 +22,21 @@ app.use(cookieParser());
 app.use(express.json());
 
 const cors = require("cors");
+const allowedOrigins = [
+  "http://localhost:5173", // for local dev
+  "https://e-commerce-frontend-sloj.onrender.com" // deployed frontend
+];
 
 app.use(cors({
-  origin: "https://e-commerce-frontend-sloj.onrender.com",
-  credentials: true
+  origin: (origin, callback) => {
+    // allow requests with no origin (like curl, postman)
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true, // allow cookies to be sent
 }));
 
 //routing API calls:
