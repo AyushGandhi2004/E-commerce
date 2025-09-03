@@ -31,6 +31,9 @@ const addToCart = async (req,res)=>{
                 userCart.items.push({productId, quantity});
             }
             userCart.save();
+            res.status(201).json({
+                message : "Product added to cart"
+            })
         }else{
             //Create a cart and then add product:
             const newCart = await Cart.create({
@@ -55,13 +58,15 @@ const removeFromCart = async (req,res)=>{
         if(!checkUser){
             return res.status(404).json({message: "User not found"});
         }
+        
         //Check if product exists:
         const checkProduct = await Product.findById(productId);
         if(!checkProduct){
             return res.status(404).json({message: "Product not found"});
         }
         //Check if user has a cart for the user id in the cart collection:
-        const userCart = await Cart.findOne({UserId : checkUser._id});
+        const userCart = await Cart.findOne({userId : checkUser._id});
+        
         if(userCart){
             const productIndex = userCart.items.findIndex((p)=> p.productId==productId);
             if(productIndex > -1){
@@ -72,7 +77,7 @@ const removeFromCart = async (req,res)=>{
                 return res.status(404).json({message: "Product not found in cart"});
             }
         }else{
-            return res.status(404).json({message: "Cart is empty"});
+            return res.status(403).json({message: "Cart is empty"});
         }
     } catch (error) {
         console.log(`Error in removing product from cart : ${error}`);
@@ -100,4 +105,37 @@ const getCartItems = async (req,res)=>{
     }
 }
 
-module.exports = {addToCart , removeFromCart , getCartItems};
+const checkCartItem = async (req,res)=>{
+    try {
+        const userId = req.userInfo.userId;
+        const productId = req.params.id;
+        
+        const checkUser = await User.findById(userId);
+        if(!checkUser){
+            return res.status(404).json({
+                message : "No user found....please log in to find the cart"
+            })
+        }
+        
+        const checkCart = await Cart.findOne({userId : userId});
+        if(!checkCart) return res.status(404).json({
+            message : "Your cart is empty"
+        })
+        
+        const ind = checkCart.items.findIndex((p)=>p.productId==productId);
+        if(ind>-1){
+            return res.status(200).json({
+                message : "Object found in cart",
+                product : checkCart.items[ind]
+            })
+        }else return res.status(404).json({
+            message : "Product not found in cart"
+        })
+    } catch (error) {
+        console.log(`Error in checking cart status of product : ${error}`);
+        res.status(500).json({
+            message : "Internal server error"
+        });
+    }
+}
+module.exports = {addToCart , removeFromCart , getCartItems , checkCartItem};
