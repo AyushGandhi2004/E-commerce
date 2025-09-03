@@ -21,7 +21,7 @@ app.use(cookieParser());
 //Using middlewares:
 app.use(express.json());
 
-const cors = require("cors");
+//const cors = require("cors");
 const allowedOrigins = [
   "http://localhost:5173", // for local dev
   "https://e-commerce-frontend-sloj.onrender.com" // deployed frontend
