@@ -54,12 +54,13 @@ const loginUser = async (req, res) => {
             process.env.JWT_SECRET
         );
         //setting cookie in res:
-        res.cookie("accessToken",accessToken,{
+        res.cookie("accessToken", accessToken, {
             httpOnly: true,
-            secure: true,       // must be true on HTTPS (Render gives HTTPS)
-            sameSite: "None",   // allow cross-site cookies (frontend + backend are diff domains)
-        })
+            secure: process.env.NODE_ENV === "production",  // only true in prod
+            sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+        });
 
+        
         res.status(200).json({
             message : "Login successful",
             user : checkUser
@@ -73,11 +74,11 @@ const loginUser = async (req, res) => {
 
 const logoutUser = async (req,res)=>{
     try {
-        res.clearCookie("accessToken",{
-            httpOnly: true,
-            secure: true,       // must be true on HTTPS (Render gives HTTPS)
-            sameSite: "None",   // allow cross-site cookies (frontend + backend are diff domains)
-        });
+        res.clearCookie("accessToken", {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: process.env.NODE_ENV === "production" ? "None" : "Lax",
+    });
         return res.status(200).json({message : "Logges out successfully"})
     } catch (error) {
         console.log('Error in logoutUser:', error);
@@ -107,6 +108,7 @@ const checkLogin = async (req, res) => {
     });
   }
 };
+
 
 
 module.exports = {registerUser , loginUser , logoutUser , checkLogin};

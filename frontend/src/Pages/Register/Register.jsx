@@ -1,9 +1,10 @@
 import axios from "axios";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import api from "../../api";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../context/User";
+import {EyeIcon , EyeSlashIcon} from '@heroicons/react/24/outline'
 
 const Register = ()=>{
     const {user,setUser} = useContext(UserContext);
@@ -11,6 +12,7 @@ const Register = ()=>{
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
     const navigate = useNavigate();
+    const [visiblePassword , setVisiblePassword] = useState(false)
 
     const registerHandler = async (e) => {
         e.preventDefault();
@@ -64,9 +66,13 @@ const Register = ()=>{
                 <h2>E-commerce</h2>
             </div>
             <form className="flex flex-col justify-between items-center mb-3 outline-1 rounded-2xl p-4" onSubmit={registerHandler}>
-                <input type="text" placeholder="Username" value={username} onChange={(e)=> setUsername(e.target.value)} className="m-3 outline-1 rounded-md p-1 "/>
-                <input type="email" placeholder="Email" value={email} onChange={(e)=> setEmail(e.target.value)} className="m-3 outline-1 rounded-md p-1 " />
-                <input type="password" placeholder="Password" value={password} onChange={(e)=> setPassword(e.target.value)} className="m-3 outline-1 rounded-md p-1 "/>
+                <input type="text" placeholder="Username" value={username} onChange={(e)=> setUsername(e.target.value)} className="m-3 outline-1 rounded-md p-1 w-full"/>
+                <input type="email" placeholder="Email" value={email} onChange={(e)=> setEmail(e.target.value)} className="m-3 outline-1 rounded-md p-1 w-full" />
+                <div className="m-3 outline-1 rounded-md p-1 flex w-full">
+                    <input type={visiblePassword?"text":"password"} placeholder="Password" value={password} onChange={(e)=> setPassword(e.target.value)} className="flex-grow outline-none bg-transparent px-2"/>
+                    {!visiblePassword ? <EyeIcon className="size-6 cursor-pointer" onClick={(e)=>setVisiblePassword(true)}/> : <EyeSlashIcon className="size-6 cursor-pointer" onClick={(e)=>setVisiblePassword(false)}/>}
+                </div>
+                
                 <button type="submit" className="bg-blue-500 text-white rounded-full px-5 py-1 shadow-md">Register</button>
             </form>
             <Link to='/login' className="text-blue-500">Already a User...LogIn</Link>

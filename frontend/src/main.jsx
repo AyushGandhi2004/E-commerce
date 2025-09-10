@@ -13,6 +13,8 @@ import CategoryProducts from './Pages/CategoryProducts/CategoryProducts.jsx';
 import Cart from './Pages/Cart/Cart.jsx';
 import ProductDescription from './Pages/ProductDescription/ProductDescription.jsx';
 import Wishlist from './Pages/wishlist/Wishlist.jsx';
+import AdminApp from './Pages/Admin/AdminApp.jsx';
+import Dashboard from './Pages/Admin/Dashboard.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -27,6 +29,11 @@ createRoot(document.getElementById('root')).render(
           <Route path="/products/category/:category" element={<CategoryProducts />} />
           <Route path='/product/:id' element={<ProductDescription/>}/>
           <Route path='/wishlist' element={<Wishlist/>}/>
+        </Route>
+        <Route path="/admin" element={<AdminApp/>}>
+          <Route index element={<Dashboard/>}/>
+          <Route path='login' element={<Login/>}/>
+          {/* <Route path='dashboard' element={<Dashboard/>}/> */}
         </Route>
       </Routes>
     </BrowserRouter>

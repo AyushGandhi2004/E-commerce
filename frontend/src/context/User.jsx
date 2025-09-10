@@ -4,7 +4,7 @@ import api from "../api";
 
 const UserContext = createContext();
 const UserProvider = ({children}) => {
-    const [user , setUser] = useState(null);
+    const [user , setUser] = useState(false);
 
     useEffect(()=>{
         const checkAuth = async ()=>{
