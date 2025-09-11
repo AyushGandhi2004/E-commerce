@@ -28,15 +28,15 @@ const NavBar = () => {
 
     return (
         <div className="bg-white shadow-md sticky top-0 z-50 justify-evenly w-full">
-            <div className="container mx-auto px-4 py-4 flex justify-between items-left ">
+            <div className="container mx-auto px-4 py-4 flex justify-evenly items-center ">
                 
                 {/* Brand Logo */}
-                <Link to="/" className="text-2xl font-bold text-black-600">
+                <Link to="/" className="sm:text-sm md:text-lg lg:text-xl font-bold text-black-600 w-full">
                     E-commerce
                 </Link>
 
                 {/* Desktop Menu - 'hidden' class removed */}
-                <div className="flex justify-around items-center space-x-8 text-lg">
+                <div className="flex justify-between lg:justify-around items-center sm: text-xs md:text-lg lg:text-xl w-full">
                     <NavLink 
                         to="/" 
                         className="text-gray-600 hover:text-blue-500 transition-colors"
