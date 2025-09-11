@@ -54,7 +54,7 @@ const deleteProductById = async (req,res) => {
 
 const getProductsByCategory = async (req,res) =>{
     try {
-        const category = req.params.category.toLowerCase();
+        const category = req.params.category;
         const ProductsByCategory = await Product.find({ category: category });
         if (ProductsByCategory.length === 0) {
             return res.status(404).json({ message: "No products found in this category" });

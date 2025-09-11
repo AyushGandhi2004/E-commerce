@@ -1,21 +1,43 @@
 
-import React from 'react';
+import React, { useContext } from 'react';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import api from '../../api';
+import SearchResults from '../../Pages/SearchResults';
+import { SearchInputContext } from '../../context/SearchInput';
+import { useNavigate } from 'react-router-dom'
 
 const SearchBar = () => {
+    const {input,setInput,search} = useContext(SearchInputContext);
+    const navigate = useNavigate();
+
+    
+
+    const handleSubmit = (e)=>{
+        e.preventDefault();
+        if(input){
+            //search(input);
+            navigate(`/search/${input}`);
+        }
+    }
+    
+
     return (
         <div className="p-8 m-5">
             <div className="container mx-auto px-4">
-                <div className="flex relative max-w-2xl mx-auto">
+                <form className="flex relative max-w-2xl mx-auto" onSubmit={handleSubmit}>
                     <input
                         type="text"
+                        value={input}
+                        onChange={(e)=>setInput(e.target.value)}
                         placeholder="Search for products..."
                         className="w-full py-3 pl-5 pr-12 text-gray-700 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow"
                     />
                     <button className="absolute inset-y-0 right-0 flex items-center justify-center w-12 h-full text-gray-500 hover:text-blue-600">
                         <MagnifyingGlassIcon className="h-5 w-5" />
                     </button>
-                </div>
+                </form>
             </div>
         </div>
     );

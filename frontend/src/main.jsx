@@ -15,6 +15,7 @@ import ProductDescription from './Pages/ProductDescription/ProductDescription.js
 import Wishlist from './Pages/wishlist/Wishlist.jsx';
 import AdminApp from './Pages/Admin/AdminApp.jsx';
 import Dashboard from './Pages/Admin/Dashboard.jsx';
+import SearchResults from './Pages/SearchResults.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -29,6 +30,7 @@ createRoot(document.getElementById('root')).render(
           <Route path="/products/category/:category" element={<CategoryProducts />} />
           <Route path='/product/:id' element={<ProductDescription/>}/>
           <Route path='/wishlist' element={<Wishlist/>}/>
+          <Route path='/search/:query' element={<SearchResults/>} />
         </Route>
         <Route path="/admin" element={<AdminApp/>}>
           <Route index element={<Dashboard/>}/>

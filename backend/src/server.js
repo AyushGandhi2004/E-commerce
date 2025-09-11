@@ -12,6 +12,7 @@ const authRoutes = require('./routes/auth-routes');
 const productRoutes = require('./routes/product-routes');
 const cartRoutes = require('./routes/cart-routes');
 const wishlistRoutes = require('./routes/wishlist-routes');
+const searchRoutes = require('./routes/search-routes');
 
 const app = express();
 connectToDatabase();
@@ -44,6 +45,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/product', productRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/wishlist', wishlistRoutes);
+app.use('/api/search',searchRoutes);
 
 app.listen(process.env.PORT || 3000, () => {
   console.log(`Server is running on port ${process.env.PORT || 3000}`);
