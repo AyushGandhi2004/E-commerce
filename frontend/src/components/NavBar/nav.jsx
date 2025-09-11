@@ -27,8 +27,8 @@ const NavBar = () => {
     }
 
     return (
-        <div className="bg-white shadow-md sticky top-0 z-50 justify-between ">
-            <div className="container mx-auto px-4 py-4 flex justify-between items-left w-[70%]">
+        <div className="bg-white shadow-md sticky top-0 z-50 justify-evenly w-full">
+            <div className="container mx-auto px-4 py-4 flex justify-between items-left ">
                 
                 {/* Brand Logo */}
                 <Link to="/" className="text-2xl font-bold text-black-600">
@@ -36,7 +36,7 @@ const NavBar = () => {
                 </Link>
 
                 {/* Desktop Menu - 'hidden' class removed */}
-                <div className="flex justify-around items-center space-x-8 text-lg w-[20%]">
+                <div className="flex justify-around items-center space-x-8 text-lg">
                     <NavLink 
                         to="/" 
                         className="text-gray-600 hover:text-blue-500 transition-colors"
