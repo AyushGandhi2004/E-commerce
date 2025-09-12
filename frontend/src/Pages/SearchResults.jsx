@@ -26,7 +26,7 @@ const SearchResults = () => {
   return (
     <div>
         <SearchBar/>
-        <div className='grid grid-cols-4 w-full gap-4 p-4'>
+        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 w-full h-full'>
             {data.map((product)=>(
               <div key={product._id} className='w-full'>
                  <ProductCard product={product}/>
