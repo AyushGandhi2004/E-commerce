@@ -21,12 +21,12 @@ const Cart = ()=>{
     },[]);
 
 
-    if(cartItemsIds.length===0) return <div> Your cart is empty</div>
+    if(cartItemsIds.length===0) return <div className=" flex justify-center mt-2 md:mt-4 text-md md:text-xl"> Your cart is empty</div>
 
     return(
         <div className="flex flex-col justify-center items-center w-full h-screen">
             <h1 className="text-3xl text-gray-800">My Cart</h1>
-            <div className="grid grid-cols-4 gap-4 p-4 w-full h-full">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 w-full h-full">
                 {
                     cartItemsIds.map((item)=>{
             

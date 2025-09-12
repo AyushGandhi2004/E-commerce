@@ -5,15 +5,15 @@ import { Link } from "react-router-dom";
 const ProductCard = ({product}) => {
     return (
         <Link to={`/product/${product._id}`}>
-        <div className="flex flex-col items-center justify-center p-4 border rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 h-80">
+        <div className="flex flex-col items-center justify-center border rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
             <div>
-                <img src={product.imageUrl} alt={product.name} className="w-full h-60 object-cover" />
+                <img src={product.imageUrl} alt={product.name} className="w-full aspect-square object-cover rounded-t-lg shadow-md z-10" />
             </div>
-            <div className="flex justify-between items-center align-middle w-full">
-                <div className="m-2 text-800 font-semibold">
+            <div className="flex flex-col items-left align-middle w-full">
+                <div className="mt-2 px-2 text-sm md:text-md lg:text-lg font-semibold overflow-hidden text-ellipsis whitespace-nowrap">
                     {product.name}
                 </div>
-                <div className="text-gray-600 outline-1 rounded-xl m-2">
+                <div className="text-gray-600 mb-1 px-2">
                     Rs. {product.price}
                 </div>
             </div>

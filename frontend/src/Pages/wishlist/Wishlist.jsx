@@ -28,10 +28,12 @@ const Wishlist = () => {
         fetchItems();
     },[])
 
+    if(items.length==0) return <div className=" flex justify-center mt-2 md:mt-4 text-md md:text-xl"> Your Wishlist is empty</div>
+
   return (
     <div className='flex flex-col justify-center w-full h-screen items-center'>
         <div className='text-2xl m-4'>Wishlist</div>
-        <div className='flex grid-cols-4 gap-4 w-full h-screen p-4'>
+        <div className='flex grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 w-full h-full'>
             {
                 items.map((item)=>{
                     return (

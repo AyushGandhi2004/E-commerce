@@ -61,7 +61,7 @@ const Register = ()=>{
 
 
     return (
-        <div className="flex flex-col justify-center items-center align-middle h-screen w-full">
+        <div className="flex flex-col justify-center items-center h-full">
             <div className="m-3">
                 <h2>E-commerce</h2>
             </div>

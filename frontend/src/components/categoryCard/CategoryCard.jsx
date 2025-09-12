@@ -22,9 +22,9 @@ const CategoryCard = ({ name, image }) => {
         
         <Link
             to={`/products/category/${name}`}
-            className="relative block rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden group"
+            className="relative block rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 overflow-hidden group"
         >
-            <div className="h-64 w-full">
+            <div className="h-60 w-full">
                 <img
                     src={image}
                     alt={name}

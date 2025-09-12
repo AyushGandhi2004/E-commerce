@@ -34,10 +34,10 @@ const CategoryProducts = () => {
     }
 
     return (
-        <div className="flex flex-col justify-center items-center w-full h-screen">
+        <div className="pt-3 flex flex-col justify-center items-center w-full h-screen">
             
-            <h1 className="text-2xl font-bold mt-4">Products in {category} Category</h1>
-            <div className="grid grid-cols-4 gap-4 p-4 w-full h-full">
+            <h1 className="flex flex-wraptext-lg font-bold mt-4">Products in {category} Category</h1>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 w-full h-full">
                 {
                     products.map((product) => {
                         return <ProductCard key={product._id} product={product}/>

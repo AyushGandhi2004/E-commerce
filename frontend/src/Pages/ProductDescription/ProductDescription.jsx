@@ -91,15 +91,15 @@ const ProductDescription = () => {
         
         <img src={product.imageUrl} alt="Product Image" />
         
-        <div className='flex justify-between w-full px-20 z-30'>
-            <div className='text-2xl'>{product.name}</div>
-            <div className='bg-blue-400 p-2 rounded-xl m-1'>Rs. {product.price}</div>
+        <div className='flex justify-between w-full px-2 mt-3 md:px-4'>
+            <div className='text-lg md:text-xl flex flex-wrap '>{product.name}</div>
+            <div className='bg-blue-400 p-2 rounded-xl text-bold'>Rs. {product.price}</div>
         </div>
-        <div className='w-full my-2 flex '>
-            <button className='h-7 w-7 ml-15 mr-4' onClick={changeWishlist}>{wishlist?<HeartIconSolid/>:<HeartIconOutline/>}</button>
-            <button className='p-1 outline-1 rounded-full' onClick={changeCart} >{cart? "Added" : "Add to Cart"}</button>
+        <div className='w-full my-2 flex justify-between'>
+            <button className='h-8 w-8 md:h-10 md:w-10 pl-2 md:pl-4' onClick={changeWishlist}>{wishlist?<HeartIconSolid/>:<HeartIconOutline/>}</button>
+            <button className='p-1 outline-1 rounded-full mr-2 md:mr-4' onClick={changeCart} >{cart? "Added" : "Add to Cart"}</button>
         </div>
-        <div className='flex flex-wrap w-full shadow-xl m-2 z-30'>
+        <div className='flex flex-wrap w-full m-2 p-2 md:m-4 md:p-4'>
             {product.description}
         </div>
     </div>

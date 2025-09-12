@@ -24,15 +24,15 @@ const SearchBar = () => {
     
 
     return (
-        <div className="p-8 m-5">
+        <div className="p-2 m-2 md:p-4 md:m-8">
             <div className="container mx-auto px-4">
-                <form className="flex relative max-w-2xl mx-auto" onSubmit={handleSubmit}>
+                <form className="flex relative max-w-3xl mx-auto " onSubmit={handleSubmit}>
                     <input
                         type="text"
                         value={input}
                         onChange={(e)=>setInput(e.target.value)}
                         placeholder="Search for products..."
-                        className="w-full py-3 pl-5 pr-12 text-gray-700 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow"
+                        className="w-full py-1 md:py-3 lg:py-4 pl-5 pr-12 text-gray-700 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition-shadow"
                     />
                     <button className="absolute inset-y-0 right-0 flex items-center justify-center w-12 h-full text-gray-500 hover:text-blue-600">
                         <MagnifyingGlassIcon className="h-5 w-5" />

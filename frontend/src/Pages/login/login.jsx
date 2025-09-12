@@ -49,7 +49,7 @@ const Login = ()=>{
 
 
     return (
-        <div className="flex flex-col justify-center items-center h-screen ">
+        <div className="flex flex-col justify-center items-center h-full ">
             <div className="m-3">
                 <h1>E-commeerce</h1>
             </div>
