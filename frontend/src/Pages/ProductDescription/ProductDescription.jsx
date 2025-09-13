@@ -1,7 +1,8 @@
 import React from 'react'
 import { useEffect } from 'react';
-import { useState } from 'react';
+import { useState,useContext } from 'react';
 import api from '../../api';
+import { UserContext } from '../../context/User';
 import { useParams } from 'react-router-dom';
 import { HeartIcon as HeartIconOutline } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
@@ -11,6 +12,7 @@ const ProductDescription = () => {
     const [product , setProduct] = useState({});
     const [wishlist,setWishlist] = useState(false);
     const [cart,setCart] = useState(false);
+    const {user} = useContext(UserContext);
     //removeWishlist not working and in useEffect i need to setWishlist acc to if product is present or not and for that i need to create a backend query if for checking if a product is in a user's wishlist or not
     const fetchProduct = async ()=>{
         try {
@@ -60,8 +62,8 @@ const ProductDescription = () => {
         }
     }
     const changeWishlist = ()=>{
-        if(!wishlist) addWishlist();
-        else removeWishlist();
+        if(user && !wishlist) addWishlist();
+        else if(user) removeWishlist();
     }
 
     const removeCart = async ()=>{
@@ -82,8 +84,8 @@ const ProductDescription = () => {
         
     }
     const changeCart = ()=>{
-        if(cart) removeCart();
-        else addCart();
+        if(user && cart) removeCart();
+        else if(user) addCart();
     }
 
   return (
@@ -96,8 +98,8 @@ const ProductDescription = () => {
             <div className='bg-blue-400 p-2 rounded-xl text-bold'>Rs. {product.price}</div>
         </div>
         <div className='w-full my-2 flex justify-between'>
-            <button className='h-8 w-8 md:h-10 md:w-10 pl-2 md:pl-4' onClick={changeWishlist}>{wishlist?<HeartIconSolid/>:<HeartIconOutline/>}</button>
-            <button className='p-1 outline-1 rounded-full mr-2 md:mr-4' onClick={changeCart} >{cart? "Added" : "Add to Cart"}</button>
+            <button className='h-8 w-8 md:h-10 md:w-10 pl-2 md:pl-4 cursor-pointer' onClick={changeWishlist}>{wishlist?<HeartIconSolid/>:<HeartIconOutline/>}</button>
+            <button className='p-1 outline-1 rounded-full mr-2 md:mr-4 cursor-pointer' onClick={changeCart} >{cart? "Added" : "Add to Cart"}</button>
         </div>
         <div className='flex flex-wrap w-full m-2 p-2 md:m-4 md:p-4'>
             {product.description}

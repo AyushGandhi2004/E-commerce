@@ -39,24 +39,24 @@ const NavBar = () => {
                 <div className="flex justify-between lg:justify-around items-center sm: text-xs md:text-lg lg:text-xl w-full">
                     <NavLink 
                         to="/" 
-                        className="text-gray-600 hover:text-blue-500 transition-colors"
+                        className={({isActive})=>`  rounded-full px-2 py-1  ${isActive ? "text-white bg-blue-500 shadow-lg opacity-85" : "text-gray-600 hover:text-blue-500"}`}
                     >
                         Home
                     </NavLink>
                     <NavLink 
                         to="/wishlist" 
-                        className="text-gray-600 hover:text-blue-500 transition-colors"
+                        className={({isActive})=>`  rounded-full px-2 py-1  ${isActive ? "text-white bg-blue-500 shadow-lg opacity-85" : "text-gray-600 hover:text-blue-500"}`}
                     >
                         Wishlist
                     </NavLink>
                     <NavLink 
                         to="/cart" 
-                        className="text-gray-600 hover:text-blue-500 transition-colors"
+                        className={({isActive})=>`  rounded-full px-2 py-1  ${isActive ? "text-white bg-blue-500 shadow-lg opacity-85" : "text-gray-600 hover:text-blue-500"}`}
                     >
                         Cart
                     </NavLink>
                     
-                    <button type="button" className="text-gray-600 hover:text-blue-500 transition-colors" onClick={handleButton}>
+                    <button type="button" className="text-gray-600 hover:text-blue-500 transition-colors cursor-pointer" onClick={handleButton}>
                         {user ? "LogOut" : "LogIn"}
                     </button>
                 </div>

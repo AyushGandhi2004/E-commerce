@@ -3,6 +3,8 @@ import NavBar from "../../components/NavBar/nav";
 import { useParams } from "react-router-dom";
 import api from "../../api";
 import ProductCard from "../../components/ProductCard/ProductCard";
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const CategoryProducts = () => {
     const {category} = useParams();
@@ -29,18 +31,21 @@ const CategoryProducts = () => {
         fetchProducts();
     },[category]);
 
-    if(loading){
-        return <div>Loading...</div>;
-    }
+    // if(loading){
+    //     return <div>Loading...</div>;
+    // }
 
     return (
         <div className="pt-3 flex flex-col justify-center items-center w-full h-screen">
+            <div className="flex flex-wraptext-lg font-bold mt-4">{
+                    loading ? <Skeleton /> : <h1 >Products in {category} Category</h1>
+                }
+            </div>
             
-            <h1 className="flex flex-wraptext-lg font-bold mt-4">Products in {category} Category</h1>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 w-full h-full">
                 {
                     products.map((product) => {
-                        return <ProductCard key={product._id} product={product}/>
+                        return loading? <Skeleton/> :<ProductCard key={product._id} product={product}/>
                     })
                 }
             </div>

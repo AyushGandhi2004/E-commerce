@@ -49,17 +49,17 @@ const Login = ()=>{
 
 
     return (
-        <div className="flex flex-col justify-center items-center h-full ">
-            <div className="m-3">
+        <div className="flex flex-col justify-center items-center h-full md: mt-4">
+            <div className="m-3 md:text-2xl">
                 <h1>E-commeerce</h1>
             </div>
-            <form className="flex flex-col justify-between items-center mb-3 outline-1 rounded-2xl p-4" onSubmit={handleSubmit}>
+            <form className="flex flex-col justify-between items-center mb-3 shadow-xl z-10 rounded-2xl p-4" onSubmit={handleSubmit}>
                 <input type="text" placeholder="Username" value={username} onChange={(e)=> setUsername(e.target.value)} className="m-3 outline-1 rounded-md p-1 flex w-full"/>
                 <div className="m-3 outline-1 rounded-md p-1 flex w-full">
                     <input type={visiblePassword?"text":"password"} placeholder="Password" value={password} onChange={(e)=> setPassword(e.target.value)} className="flex-grow outline-none bg-transparent px-2"/>
                     {!visiblePassword ? <EyeIcon className="size-6 cursor-pointer" onClick={(e)=>setVisiblePassword(true)}/> : <EyeSlashIcon className="size-6 cursor-pointer" onClick={(e)=>setVisiblePassword(false)}/>}
                 </div>
-                <button type="submit" className="bg-blue-500 text-white rounded-full px-5 py-1 shadow-md">Login</button>
+                <button type="submit" className="bg-blue-500 text-white rounded-full px-5 py-1 shadow-md cursor-pointer hover:bg-blue-600">Login</button>
             </form>
             <Link to='/register' className="text-blue-500">New to E-commerce...SignUp</Link>
         </div>
