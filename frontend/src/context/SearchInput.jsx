@@ -19,7 +19,7 @@ const SearchInputProvider = ({children})=>{
             console.log(res);
             setData(res.data.products);
             setCache((prev)=>({...prev,[input] : res.data.products}))
-            console.log(cache)
+            console.log(data)
         } catch (error) {
             console.log("Error at search function : ",error);
             setData([]);

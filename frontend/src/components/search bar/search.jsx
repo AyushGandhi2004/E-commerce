@@ -9,10 +9,13 @@ import { SearchInputContext } from '../../context/SearchInput';
 import { useNavigate } from 'react-router-dom'
 
 const SearchBar = () => {
-    const {input,setInput,search} = useContext(SearchInputContext);
+    const {input,setInput,search,data,cache} = useContext(SearchInputContext);
     const navigate = useNavigate();
 
-    
+    // useEffect(()=>{
+    //     const timer = setTimeout(search,500);
+    //     return (()=>clearTimeout(timer));
+    // },[input]);
 
     const handleSubmit = (e)=>{
         e.preventDefault();
@@ -39,6 +42,15 @@ const SearchBar = () => {
                     </button>
                 </form>
             </div>
+            {/* {data && (
+                <div className='max-h-40 overflow-y-scroll'>
+                    {
+                        data.map((product)=>{
+                            <div key={product._id}>{product.name}</div>
+                        })
+                    }
+                </div>
+            )} */}
         </div>
     );
 };

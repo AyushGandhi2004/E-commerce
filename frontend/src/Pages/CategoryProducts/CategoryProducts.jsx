@@ -38,16 +38,18 @@ const CategoryProducts = () => {
     return (
         <div className="pt-3 flex flex-col justify-center items-center w-full h-screen">
             <div className="flex flex-wraptext-lg font-bold mt-4">{
-                    loading ? <Skeleton /> : <h1 >Products in {category} Category</h1>
+                    loading ? <Skeleton containerClassName="flex-1" height={30} width={400} className="w-[100] md:w-[400]"/> : <h1 >Products in {category} Category</h1>
                 }
             </div>
             
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 w-full h-full">
-                {
-                    products.map((product) => {
-                        return loading? <Skeleton/> :<ProductCard key={product._id} product={product}/>
-                    })
-                }
+                {loading? 
+                    Array(8).fill().map((_, i) => (
+                    <Skeleton key={i} height={250} />
+                    ))
+                    : products.map((product) => (
+                    <ProductCard key={product._id} product={product} />
+                ))}
             </div>
         </div>
     )
