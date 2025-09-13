@@ -6,6 +6,8 @@ import { UserContext } from '../../context/User';
 import { useParams } from 'react-router-dom';
 import { HeartIcon as HeartIconOutline } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const ProductDescription = () => {
     const {id} = useParams();
@@ -13,6 +15,7 @@ const ProductDescription = () => {
     const [wishlist,setWishlist] = useState(false);
     const [cart,setCart] = useState(false);
     const {user} = useContext(UserContext);
+    const [loading, setLoading] = useState(true);
     //removeWishlist not working and in useEffect i need to setWishlist acc to if product is present or not and for that i need to create a backend query if for checking if a product is in a user's wishlist or not
     const fetchProduct = async ()=>{
         try {
@@ -43,6 +46,7 @@ const ProductDescription = () => {
         fetchProduct();
         fetchWishlistStatus();
         fetchCartStatus();
+        setLoading(false);
     },[id]);
 
     const addWishlist = async ()=>{
@@ -91,18 +95,18 @@ const ProductDescription = () => {
   return (
     <div className='flex flex-col items-center w-full h-screen'>
         
-        <img src={product.imageUrl} alt="Product Image" />
+        {loading ? <Skeleton height={400} width={600} containerClassName='flex-1'/> :<img src={product.imageUrl} alt="Product Image" />}
         
         <div className='flex justify-between w-full px-2 mt-3 md:px-4'>
-            <div className='text-lg md:text-xl flex flex-wrap '>{product.name}</div>
-            <div className='bg-blue-400 p-2 rounded-xl text-bold'>Rs. {product.price}</div>
+            {loading? <Skeleton containerClassName='flex-1' height={30} width={80}/> :<div className='text-lg md:text-xl flex flex-wrap '>{product.name}</div>}
+            {loading? <Skeleton containerClassName='flex-1' height={30} width={80}/> :<div className='bg-blue-400 p-2 rounded-xl text-bold'>Rs. {product.price}</div>}
         </div>
         <div className='w-full my-2 flex justify-between'>
-            <button className='h-8 w-8 md:h-10 md:w-10 pl-2 md:pl-4 cursor-pointer' onClick={changeWishlist}>{wishlist?<HeartIconSolid/>:<HeartIconOutline/>}</button>
-            <button className='p-1 outline-1 rounded-full mr-2 md:mr-4 cursor-pointer' onClick={changeCart} >{cart? "Added" : "Add to Cart"}</button>
+            {loading? <Skeleton containerClassName='flex-1' height={8} width={8}/> :<button className='h-8 w-8 md:h-10 md:w-10 pl-2 md:pl-4 cursor-pointer' onClick={changeWishlist}>{wishlist?<HeartIconSolid/>:<HeartIconOutline/>}</button>}
+            {loading? <Skeleton containerClassName='flex-1' height={20} width={50}/> :<button className='p-1 outline-1 rounded-full mr-2 md:mr-4 cursor-pointer' onClick={changeCart} >{cart? "Added" : "Add to Cart"}</button>}
         </div>
         <div className='flex flex-wrap w-full m-2 p-2 md:m-4 md:p-4'>
-            {product.description}
+            {loading? <Skeleton containerClassName='flex-1' height={100} width={600}/> :product.description}
         </div>
     </div>
   )

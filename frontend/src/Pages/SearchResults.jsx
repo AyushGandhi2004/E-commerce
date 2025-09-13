@@ -3,9 +3,12 @@ import SearchBar from '../components/search bar/search'
 import { SearchInputContext } from '../context/SearchInput'
 import ProductCard from '../components/ProductCard/ProductCard'
 import { useParams } from 'react-router-dom'
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+
 
 const SearchResults = () => {
-  const {data,setInput,search} = useContext(SearchInputContext);
+  const {data,setInput,search,searchLoading} = useContext(SearchInputContext);
   const {query} = useParams();
 
   useEffect(()=>{
@@ -13,7 +16,7 @@ const SearchResults = () => {
     search(query);
   },[query])
   
-  if(data.length==0) return (
+  if(!searchLoading && data.length==0) return (
     <>
       <SearchBar/>
       <div className=' flex justify-center items-center'>
@@ -27,7 +30,12 @@ const SearchResults = () => {
     <div>
         <SearchBar/>
         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 w-full h-full'>
-            {data.map((product)=>(
+            {
+              searchLoading? 
+              Array(8).fill().map((_,i)=>(
+                <Skeleton key={i} height={250}/>
+              )):
+            data.map((product)=>(
               <div key={product._id} className='w-full'>
                  <ProductCard product={product}/>
               </div>

@@ -7,9 +7,11 @@ const SearchInputProvider = ({children})=>{
     const [input,setInput] = useState("");
     const [cache,setCache] = useState({});
     const [data,setData] = useState([]);
+    const [searchLoading, setSearchLoading] = useState(null);
 
     const search = async (input)=>{
         try {
+            setSearchLoading(true);
             if(cache[input]){
                 setData(cache[input]);
                 console.log("Used Cache");
@@ -23,6 +25,8 @@ const SearchInputProvider = ({children})=>{
         } catch (error) {
             console.log("Error at search function : ",error);
             setData([]);
+        }finally{
+            setSearchLoading(false);
         }
     }
 
@@ -33,7 +37,7 @@ const SearchInputProvider = ({children})=>{
 
 
     return (
-        <SearchInputContext.Provider value={{input,setInput,cache,setCache,data,setData,search}}>
+        <SearchInputContext.Provider value={{input,setInput,cache,setCache,data,setData,search,searchLoading, setSearchLoading}}>
             {children}
         </SearchInputContext.Provider>
     )
