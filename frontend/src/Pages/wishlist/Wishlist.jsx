@@ -86,7 +86,7 @@ const Wishlist = () => {
         <div className="min-h-screen bg-[var(--color-bg-primary)]">
             <div className="page-shell section-gap">
                 {/* Page Header */}
-                <div className="mb-8 md:mb-12 rounded-2xl md:rounded-3xl border border-[var(--color-primary-light)]/55 bg-white/70 px-5 md:px-7 py-5 md:py-6">
+                <div className="mb-7 md:mb-10 rounded-2xl md:rounded-3xl surface-block px-5 md:px-7 py-5 md:py-6">
                     {loading ? (
                         <Skeleton height={50} width={300} containerClassName='flex-1'/>
                     ) : (

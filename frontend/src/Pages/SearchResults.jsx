@@ -40,7 +40,7 @@ const SearchResults = () => {
         <SearchBar/>
       <div className='page-shell pb-12'>
           {/* Results Header */}
-          <div className='mb-8 rounded-2xl md:rounded-3xl border border-[var(--color-primary-light)]/55 bg-white/70 px-5 md:px-7 py-5 md:py-6'>
+          <div className='mb-7 rounded-2xl md:rounded-3xl surface-block px-5 md:px-7 py-5 md:py-6'>
             {searchLoading ? (
               <Skeleton height={40} width={300} containerClassName='flex-1'/>
             ) : (

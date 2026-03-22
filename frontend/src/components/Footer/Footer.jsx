@@ -14,7 +14,7 @@ const Footer = () => {
           {/* Brand Section */}
           <div className="lg:col-span-1">
             <Link to="/" className="text-2xl md:text-3xl font-bold heading-gradient mb-4 block">
-              ✨ Ecommerce
+              ShopIn
             </Link>
             <p className="text-[var(--color-text-secondary)] text-sm mb-4">
               Your one-stop destination for premium products and exceptional shopping experience.
@@ -61,15 +61,15 @@ const Footer = () => {
             <div className="space-y-4">
               <div className="flex items-start gap-3">
                 <MapPinIcon className="w-5 h-5 text-[var(--color-primary-dark)] mt-1 flex-shrink-0" />
-                <p className="text-[var(--color-text-secondary)] text-sm">123 Shopping Street, City, Country</p>
+                <p className="text-[var(--color-text-secondary)] text-sm">Ayush Gandhi, Nadiad, India</p>
               </div>
               <div className="flex items-center gap-3">
                 <PhoneIcon className="w-5 h-5 text-[var(--color-primary-dark)] flex-shrink-0" />
-                <a href="tel:+1234567890" className="text-[var(--color-text-secondary)] hover:text-[var(--color-primary-dark)] transition-colors text-sm">+1 (234) 567-890</a>
+                <a href="tel:+1234567890" className="text-[var(--color-text-secondary)] hover:text-[var(--color-primary-dark)] transition-colors text-sm">+91 963 842 4721</a>
               </div>
               <div className="flex items-center gap-3">
                 <EnvelopeIcon className="w-5 h-5 text-[var(--color-primary-dark)] flex-shrink-0" />
-                <a href="mailto:support@ecommerce.com" className="text-[var(--color-text-secondary)] hover:text-[var(--color-primary-dark)] transition-colors text-sm">support@ecommerce.com</a>
+                <a href="mailto:support@ecommerce.com" className="text-[var(--color-text-secondary)] hover:text-[var(--color-primary-dark)] transition-colors text-sm">workayush2004@gmail.com</a>
               </div>
             </div>
           </div>

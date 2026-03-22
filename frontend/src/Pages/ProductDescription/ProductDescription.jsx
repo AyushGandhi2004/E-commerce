@@ -108,7 +108,7 @@ const ProductDescription = () => {
             <div className='page-shell pt-6'>
                 <button
                     onClick={() => navigate(-1)}
-                    className='inline-flex items-center gap-2 text-[var(--color-primary-dark)] hover:text-[var(--color-primary-light)] transition-colors font-semibold px-4 py-2 rounded-full border border-[var(--color-primary-light)]/60 bg-white/70'
+                    className='inline-flex items-center gap-2 text-[var(--color-primary-dark)] hover:text-[var(--color-primary-light)] transition-colors font-semibold px-4 py-2 rounded-full bg-white/80 shadow-sm'
                 >
                     <ArrowLeftIcon className='w-5 h-5' />
                     Back
@@ -117,7 +117,7 @@ const ProductDescription = () => {
 
             {/* Product Content */}
             <div className='page-shell section-gap'>
-                <div className='grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10 rounded-2xl md:rounded-3xl border border-[var(--color-primary-light)]/55 bg-white/70 p-4 md:p-6 lg:p-8'>
+                <div className='grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10 rounded-2xl md:rounded-3xl surface-block p-4 md:p-6 lg:p-8'>
                     {/* Image Section */}
                     <div className='flex items-center justify-center'>
                         {loading ? (

@@ -35,9 +35,9 @@ const NavBar = () => {
                     {/* Logo */}
                     <Link
                         to="/"
-                        className="text-2xl md:text-3xl lg:text-4xl font-bold heading-gradient hover:opacity-90 transition-opacity whitespace-nowrap"
+                        className="text-2xl md:text-3xl lg:text-4xl font-bold heading-gradient hover:opacity-90 transition-opacity whitespace-nowrap pl-2.5"
                     >
-                        Ecommerce
+                        ShopIn
                     </Link>
 
                     {/* Desktop Navigation Menu */}

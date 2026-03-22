@@ -3,7 +3,7 @@ import React from "react";
 const Banner = () => {
     return (
         <section className="w-full bg-[var(--color-bg-primary)] border-b border-[var(--color-primary-light)]/30">
-            <div className="page-shell py-14 md:py-20">
+            <div className="page-shell py-10 md:py-14">
                 <div className="relative overflow-hidden rounded-3xl border border-[var(--color-primary-light)]/50 px-6 md:px-10 py-12 md:py-16 text-center bg-gradient-to-br from-[var(--color-primary-soft)] via-white to-[var(--color-primary-light)]/75 shadow-lg">
                     <div className="absolute -top-14 -left-12 h-44 w-44 rounded-full bg-[var(--color-primary-light)]/55 blur-3xl" />
                     <div className="absolute -bottom-20 -right-8 h-52 w-52 rounded-full bg-[var(--color-primary-dark)]/25 blur-3xl" />

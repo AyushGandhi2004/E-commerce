@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import NavBar from "../../components/NavBar/nav";
 import { useParams } from "react-router-dom";
 import api from "../../api";
 import ProductCard from "../../components/ProductCard/ProductCard";
@@ -33,7 +32,7 @@ const CategoryProducts = () => {
         <div className="min-h-screen bg-[var(--color-bg-primary)]">
             {/* Page Header */}
             <div className="page-shell section-gap">
-                <div className="mb-8 md:mb-12 rounded-2xl md:rounded-3xl border border-[var(--color-primary-light)]/55 bg-white/70 px-5 md:px-7 py-5 md:py-6">
+                <div className="mb-7 md:mb-10 rounded-2xl md:rounded-3xl surface-block px-5 md:px-7 py-5 md:py-6">
                     {loading ? (
                         <Skeleton height={50} width={400} containerClassName='flex-1'/>
                     ) : (

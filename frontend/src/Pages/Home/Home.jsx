@@ -3,7 +3,6 @@ import React from 'react';
 import SearchBar from '../../components/searchbar/search';
 import Banner from '../../components/Banner/banner';
 import CategoryCard from '../../components/categoryCard/CategoryCard';
-import { SparklesIcon } from '@heroicons/react/24/outline';
 
 const categories = [
     { name: "Electronics", image: "/electronicsCategory.jpeg" },
@@ -27,12 +26,16 @@ const Home = () => {
             <section className="page-shell section-gap">
                 {/* Section Header */}
                 <div className="mb-10 md:mb-12 text-center max-w-3xl mx-auto">
-                    <div className="inline-flex items-center gap-2 mb-3 px-5 md:px-6 py-3 md:py-3.5 rounded-2xl bg-white/70 border border-[var(--color-primary-light)]/60">
-                        <SparklesIcon className="w-5 h-5 text-[var(--color-primary-dark)]" />
-                        <h2 className="section-title heading-gradient">
-                            Shop by Category
-                        </h2>
-                        <SparklesIcon className="w-5 h-5 text-[var(--color-primary-dark)]" />
+                    <p className="text-xs md:text-sm uppercase tracking-[0.24em] text-[var(--color-primary-deep)]/70 font-semibold mb-3">
+                        Explore Collections
+                    </p>
+                    <h2 className="section-title heading-gradient pb-1.5">
+                        Shop by Category
+                    </h2>
+                    <div className="flex items-center justify-center gap-3 mb-4 mt-4">
+                        <span className="h-px w-12 md:w-16 bg-gradient-to-r from-transparent to-[var(--color-primary-light)]" />
+                        <span className="w-2 h-2 rounded-full bg-[var(--color-primary-dark)]/70" />
+                        <span className="h-px w-12 md:w-16 bg-gradient-to-l from-transparent to-[var(--color-primary-light)]" />
                     </div>
                     <p className="text-[var(--color-text-secondary)] text-base md:text-lg max-w-2xl mx-auto">
                         Explore our carefully curated collections across all categories
