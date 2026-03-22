@@ -3,20 +3,25 @@ import { useEffect } from 'react';
 import { useState,useContext } from 'react';
 import api from '../../api';
 import { UserContext } from '../../context/User';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { HeartIcon as HeartIconOutline } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
+import { ShoppingCartIcon, ArrowLeftIcon } from '@heroicons/react/24/outline';
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import PlaceholderImage from '../../components/PlaceholderImage/PlaceholderImage';
 
 const ProductDescription = () => {
     const {id} = useParams();
+    const navigate = useNavigate();
     const [product , setProduct] = useState({});
     const [wishlist,setWishlist] = useState(false);
     const [cart,setCart] = useState(false);
     const {user} = useContext(UserContext);
     const [loading, setLoading] = useState(true);
-    //removeWishlist not working and in useEffect i need to setWishlist acc to if product is present or not and for that i need to create a backend query if for checking if a product is in a user's wishlist or not
+    const [imageError, setImageError] = useState(false);
+    const [cartLoading, setCartLoading] = useState(false);
+
     const fetchProduct = async ()=>{
         try {
             const response = await api.get(`/product/${id}`);
@@ -72,44 +77,168 @@ const ProductDescription = () => {
 
     const removeCart = async ()=>{
         try {
+            setCartLoading(true);
             const response = await api.post('/cart/remove' , {productId : id});
             if(response.status == 200) setCart(false);
         } catch (error) {
             console.log(`Error in removing from cart : ${error}`);
+        } finally {
+            setCartLoading(false);
         }
     }
     const addCart = async ()=>{
         try {
+            setCartLoading(true);
             const response  = await api.post('/cart/add' , {productId : id , quantity : 1})
             if(response.status == 201) setCart(true);
         } catch (error) {
-            console.log(`Error in addin to cart : ${error}`);
+            console.log(`Error in adding to cart : ${error}`);
+        } finally {
+            setCartLoading(false);
         }
-        
     }
     const changeCart = ()=>{
         if(user && cart) removeCart();
         else if(user) addCart();
     }
 
-  return (
-    <div className='flex flex-col items-center w-full h-screen'>
-        
-        {loading ? <Skeleton height={400} width={600} containerClassName='flex-1'/> :<img src={product.imageUrl} alt="Product Image" />}
-        
-        <div className='flex justify-between w-full px-2 mt-3 md:px-4'>
-            {loading? <Skeleton containerClassName='flex-1' height={30} width={80}/> :<div className='text-lg md:text-xl flex flex-wrap '>{product.name}</div>}
-            {loading? <Skeleton containerClassName='flex-1' height={30} width={80}/> :<div className='bg-blue-400 p-2 rounded-xl text-bold'>Rs. {product.price}</div>}
+    return (
+        <div className='min-h-screen bg-[var(--color-bg-primary)]'>
+            {/* Back Button */}
+            <div className='page-shell pt-6'>
+                <button
+                    onClick={() => navigate(-1)}
+                    className='inline-flex items-center gap-2 text-[var(--color-primary-dark)] hover:text-[var(--color-primary-light)] transition-colors font-semibold px-4 py-2 rounded-full border border-[var(--color-primary-light)]/60 bg-white/70'
+                >
+                    <ArrowLeftIcon className='w-5 h-5' />
+                    Back
+                </button>
+            </div>
+
+            {/* Product Content */}
+            <div className='page-shell section-gap'>
+                <div className='grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10 rounded-2xl md:rounded-3xl border border-[var(--color-primary-light)]/55 bg-white/70 p-4 md:p-6 lg:p-8'>
+                    {/* Image Section */}
+                    <div className='flex items-center justify-center'>
+                        {loading ? (
+                            <Skeleton height={500} width={400} containerClassName='w-full' />
+                        ) : (
+                            <div className='card w-full aspect-square flex items-center justify-center gradient-lavender p-4 rounded-2xl md:rounded-3xl'>
+                                {!imageError && product.imageUrl ? (
+                                    <img
+                                        src={product.imageUrl}
+                                        alt={product.name}
+                                        className='w-full h-full object-contain'
+                                        onError={() => setImageError(true)}
+                                    />
+                                ) : (
+                                    <div className='flex items-center justify-center h-full'>
+                                        <PlaceholderImage width={300} height={300} />
+                                    </div>
+                                )}
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Details Section */}
+                    <div className='flex flex-col justify-between gap-6'>
+                        {/* Product Info */}
+                        <div>
+                            {/* Name */}
+                            <div>
+                                {loading ? (
+                                    <Skeleton height={40} width={300} containerClassName='mb-4' />
+                                ) : (
+                                    <h1 className='text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--color-text-primary)] mb-4 leading-tight'>
+                                        {product.name}
+                                    </h1>
+                                )}
+                            </div>
+
+                            {/* Price */}
+                            <div>
+                                {loading ? (
+                                    <Skeleton height={50} width={150} containerClassName='mb-6' />
+                                ) : (
+                                    <div className='mb-6'>
+                                        <p className='text-[var(--color-text-light)] text-sm mb-2'>Price</p>
+                                        <div className='bg-[var(--color-primary-soft)] border border-[var(--color-primary-light)] rounded-2xl px-5 md:px-6 py-4 inline-block shadow-sm'>
+                                            <p className='text-3xl md:text-4xl font-semibold text-[var(--color-primary-deep)]'>
+                                                Rs. {product.price}
+                                            </p>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* Description */}
+                            <div className='mb-8'>
+                                {loading ? (
+                                    <Skeleton height={150} containerClassName='mb-4' />
+                                ) : (
+                                    <div>
+                                        <h3 className='text-lg font-semibold text-[var(--color-text-primary)] mb-3'>
+                                            Description
+                                        </h3>
+                                        <p className='text-[var(--color-text-secondary)] leading-relaxed bg-[var(--color-bg-tertiary)] p-4 md:p-5 rounded-xl border border-[var(--color-primary-light)]/45'>
+                                            {product.description || 'No description available'}
+                                        </p>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+
+                        {/* Action Buttons */}
+                        <div className='flex flex-col gap-3 md:gap-4'>
+                            {/* Cart Button */}
+                            <button
+                                onClick={changeCart}
+                                disabled={cartLoading || !user}
+                                className={`w-full py-3.5 md:py-4 rounded-xl font-semibold text-base md:text-lg flex items-center justify-center gap-2 transition-all ${
+                                    cart
+                                        ? 'bg-red-100 text-red-700 border-2 border-red-300 hover:bg-red-200'
+                                        : 'btn-primary'
+                                } disabled:opacity-50 disabled:cursor-not-allowed`}
+                            >
+                                <ShoppingCartIcon className='w-5 h-5' />
+                                {!user ? 'Login to Add' : cart ? 'Remove from Cart' : 'Add to Cart'}
+                            </button>
+
+                            {/* Wishlist Button */}
+                            <button
+                                onClick={changeWishlist}
+                                disabled={!user}
+                                className={`w-full py-3 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all border-2 ${
+                                    wishlist
+                                        ? 'bg-red-50 text-red-600 border-red-300 hover:bg-red-100'
+                                        : 'bg-[var(--color-bg-tertiary)] text-[var(--color-text-primary)] border-[var(--color-primary-light)] hover:border-[var(--color-primary-dark)]'
+                                } disabled:opacity-50 disabled:cursor-not-allowed`}
+                            >
+                                {wishlist ? (
+                                    <>
+                                        <HeartIconSolid className='w-5 h-5' />
+                                        Added to Wishlist
+                                    </>
+                                ) : (
+                                    <>
+                                        <HeartIconOutline className='w-5 h-5' />
+                                        Add to Wishlist
+                                    </>
+                                )}
+                            </button>
+
+                            {/* Login prompt */}
+                            {!user && (
+                                <p className='text-center text-sm text-[var(--color-text-light)]'>
+                                    Please log in to add items to cart or wishlist
+                                </p>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div className='w-full my-2 flex justify-between'>
-            {loading? <Skeleton containerClassName='flex-1' height={8} width={8}/> :<button className='h-8 w-8 md:h-10 md:w-10 pl-2 md:pl-4 cursor-pointer' onClick={changeWishlist}>{wishlist?<HeartIconSolid/>:<HeartIconOutline/>}</button>}
-            {loading? <Skeleton containerClassName='flex-1' height={20} width={50}/> :<button className='p-1 outline-1 rounded-full mr-2 md:mr-4 cursor-pointer' onClick={changeCart} >{cart? "Added" : "Add to Cart"}</button>}
-        </div>
-        <div className='flex flex-wrap w-full m-2 p-2 md:m-4 md:p-4'>
-            {loading? <Skeleton containerClassName='flex-1' height={100} width={600}/> :product.description}
-        </div>
-    </div>
-  )
+    )
 }
 
 export default ProductDescription

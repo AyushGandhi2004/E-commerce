@@ -3,7 +3,8 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import './index.css';
+import './App.css';
+import './index.css'
 
 import App from './App.jsx';
 import Home from './Pages/Home/Home.jsx';
@@ -16,6 +17,7 @@ import Wishlist from './Pages/wishlist/Wishlist.jsx';
 import AdminApp from './Pages/Admin/AdminApp.jsx';
 import Dashboard from './Pages/Admin/Dashboard.jsx';
 import SearchResults from './Pages/SearchResults.jsx';
+import Product from './Pages/Admin/Product.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -35,6 +37,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/admin" element={<AdminApp/>}>
           <Route index element={<Dashboard/>}/>
           <Route path='login' element={<Login/>}/>
+          <Route path='product' element={<Product/>}/>
           {/* <Route path='dashboard' element={<Dashboard/>}/> */}
         </Route>
       </Routes>

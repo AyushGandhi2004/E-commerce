@@ -8,11 +8,9 @@ import 'react-loading-skeleton/dist/skeleton.css'
 
 const CategoryProducts = () => {
     const {category} = useParams();
-    //declaring states for products and loading:
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    //Make an api call using useEffect to feth the products of the category and then assign it to products state and setLoading false on completion i.e. finally. Also make sure to set dependancy array to category so if someone changes the category via url it will fetch the products of that category:
     useEffect(()=>{
         const fetchProducts = async ()=>{
             try {
@@ -31,25 +29,41 @@ const CategoryProducts = () => {
         fetchProducts();
     },[category]);
 
-    // if(loading){
-    //     return <div>Loading...</div>;
-    // }
-
     return (
-        <div className="pt-3 flex flex-col justify-center items-center w-full h-screen">
-            <div className="flex flex-wraptext-lg font-bold mt-4">{
-                    loading ? <Skeleton containerClassName="flex-1" height={30} width={400} className="w-[100] md:w-[400]"/> : <h1 >Products in {category} Category</h1>
-                }
-            </div>
-            
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 w-full h-full">
-                {loading? 
-                    Array(8).fill().map((_, i) => (
-                    <Skeleton key={i} height={250} />
-                    ))
-                    : products.map((product) => (
-                    <ProductCard key={product._id} product={product} />
-                ))}
+        <div className="min-h-screen bg-[var(--color-bg-primary)]">
+            {/* Page Header */}
+            <div className="page-shell section-gap">
+                <div className="mb-8 md:mb-12 rounded-2xl md:rounded-3xl border border-[var(--color-primary-light)]/55 bg-white/70 px-5 md:px-7 py-5 md:py-6">
+                    {loading ? (
+                        <Skeleton height={50} width={400} containerClassName='flex-1'/>
+                    ) : (
+                        <div>
+                            <h1 className="text-4xl md:text-5xl font-bold heading-gradient mb-2">
+                                {category} Collection
+                            </h1>
+                            <p className="text-[var(--color-text-secondary)]">
+                                Showing {products.length} products
+                            </p>
+                        </div>
+                    )}
+                </div>
+
+                {/* Products Grid */}
+                <div className="product-grid pb-4">
+                    {loading? 
+                        Array(8).fill().map((_, i) => (
+                        <Skeleton key={i} height={250} />
+                        ))
+                        : products.length > 0 ? products.map((product) => (
+                        <ProductCard key={product._id} product={product} />
+                    )) : (
+                        <div className="col-span-full text-center py-12">
+                            <p className="text-[var(--color-text-secondary)] text-lg">
+                                No products found in this category
+                            </p>
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     )

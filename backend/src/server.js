@@ -5,6 +5,9 @@ require('dotenv').config();
 const connectToDatabase = require('./database/db');
 const e = require('express');
 const cookieParser = require("cookie-parser");
+// //setup for multer:
+// const multer  = require('multer')
+// const upload = multer({ dest: 'uploads/' })
 
 
 // Importing routes
@@ -13,6 +16,7 @@ const productRoutes = require('./routes/product-routes');
 const cartRoutes = require('./routes/cart-routes');
 const wishlistRoutes = require('./routes/wishlist-routes');
 const searchRoutes = require('./routes/search-routes');
+const multerRoutes = require('./routes/multer-routes');
 
 const app = express();
 connectToDatabase();
@@ -21,6 +25,8 @@ app.use(cookieParser());
 
 //Using middlewares:
 app.use(express.json());
+//whenever we get datain form:
+app.use(express.urlencoded({extended:false}));
 
 //const cors = require("cors");
 const allowedOrigins = [
@@ -46,6 +52,8 @@ app.use('/api/product', productRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/wishlist', wishlistRoutes);
 app.use('/api/search',searchRoutes);
+app.use('/api/multer',multerRoutes)
+
 
 app.listen(process.env.PORT || 3000, () => {
   console.log(`Server is running on port ${process.env.PORT || 3000}`);

@@ -1,4 +1,5 @@
 const cloudinary = require('cloudinary').v2;
+const fs = require('fs');
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -6,5 +7,23 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
-module.exports = cloudinary;
+const uploadOnCloudinary = async (filePath)=>{
+    try {
+        if(!filePath){
+            throw new Error("File Path not found");
+            return null;
+        }
+        //upload on cloudinary:
+        const response = await cloudinary.uploader.upload(filePath,{
+            resource_type: "auto"
+        });
+        console.log(response);
+        return response.url;
+    } catch (error) {
+        fs.unlinkSync(filePath)
+        return null
+    }
+}
+
+module.exports = {uploadOnCloudinary};
   

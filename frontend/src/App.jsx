@@ -3,20 +3,20 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom'; // Import Outlet
 import NavBar from './components/NavBar/nav';
-import { UserProvider,UserContext } from './context/User';
+import Footer from './components/Footer/Footer';
+import { UserProvider } from './context/User';
 import { SearchInputProvider } from './context/SearchInput';
 
 const App = () => {
   return (
     <UserProvider>
       <SearchInputProvider>
-        <div className="bg-gray-50 min-h-screen">
+        <div className="bg-[var(--color-bg-primary)] min-h-screen flex flex-col">
           <NavBar />
-          <main>
-          
+          <main className="flex-grow">
             <Outlet />
           </main>
-          {/* You can add a Footer component here later */}
+          <Footer />
         </div>
       </SearchInputProvider>
     </UserProvider>

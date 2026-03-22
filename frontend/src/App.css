@@ -1,4 +1,258 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* ==================== MODERN COLOR PALETTE (CSS VARIABLES) ==================== */
+/* All colors are defined here for easy updates across the entire app */
+:root {
+  /* Pastel Lavender Theme (Simplified) */
+  --color-primary-light: #e6ddf3;
+  --color-primary-dark: #cdbde6;
+  --color-primary-deep: #8f7ba9;
+  --color-primary-soft: #f5f1fb;
+  --color-accent-yellow: #f4edd8;
+  
+  /* Neutral Colors */
+  --color-bg-primary: #faf8fd;
+  --color-bg-secondary: #ffffff;
+  --color-bg-tertiary: #f2edf8;
+  
+  /* Text Colors */
+  --color-text-primary: #403a4b;
+  --color-text-secondary: #6f687d;
+  --color-text-light: #9f98ae;
+  --color-text-inverse: #ffffff;
+  --color-heading-start: #6f5b88;
+  --color-heading-end: #8a76a3;
+  
+  /* Status Colors */
+  --color-error: #FF6B6B;
+  --color-success: #8ecfbf;
+  --color-warning: #FFDD94;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 8px 20px rgba(0, 0, 0, 0.15);
+  --shadow-xl: 0 12px 32px rgba(0, 0, 0, 0.18);
+  
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, var(--color-primary-soft) 0%, var(--color-primary-light) 100%);
+  --gradient-lavender: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary-dark) 100%);
+  --gradient-accent: linear-gradient(135deg, var(--color-primary-soft) 0%, var(--color-primary-light) 100%);
+  --gradient-warm: linear-gradient(135deg, var(--color-primary-soft) 0%, var(--color-primary-light) 100%);
+  --gradient-heading: linear-gradient(135deg, var(--color-heading-start) 0%, var(--color-heading-end) 100%);
+  
+  /* Border Radius */
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 22px;
+  --radius-full: 9999px;
+  
+  /* Transitions */
+  --transition-fast: 0.2s ease-in-out;
+  --transition-normal: 0.3s ease-in-out;
+  --transition-slow: 0.5s ease-in-out;
+
+  /* Glass + Surface Tokens */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-bg-strong: rgba(255, 255, 255, 0.86);
+  --glass-border: rgba(205, 189, 230, 0.45);
+  --focus-ring: color-mix(in srgb, var(--color-primary-dark) 25%, white);
+}
+
+/* ==================== GLOBAL STYLES ==================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: radial-gradient(circle at top right, var(--color-primary-soft) 0%, transparent 45%),
+    radial-gradient(circle at left 70%, color-mix(in srgb, var(--color-primary-light) 38%, white) 0%, transparent 40%),
+    var(--color-bg-primary);
+  color: var(--color-text-primary);
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+button,
+input,
+select,
+textarea {
+  border-radius: var(--radius-md);
+  font: inherit;
+}
+
+a {
+  transition: color var(--transition-fast), opacity var(--transition-fast);
+}
+
+/* ==================== REUSABLE UTILITY CLASSES ==================== */
+.gradient-primary {
+  background: var(--gradient-primary);
+}
+
+.gradient-lavender {
+  background: var(--gradient-lavender);
+}
+
+.gradient-accent {
+  background: var(--gradient-accent);
+}
+
+.gradient-warm {
+  background: var(--gradient-warm);
+}
+
+.heading-gradient {
+  background: var(--gradient-heading);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.page-shell {
+  width: min(1240px, 100% - clamp(1rem, 3.5vw, 2.5rem));
+  margin-inline: auto;
+}
+
+.section-gap {
+  padding-block: clamp(1.5rem, 4vw, 3.5rem);
+}
+
+.card {
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-lg);
+  border: 1px solid color-mix(in srgb, var(--color-primary-light) 55%, white);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md), 0 0 0 1px color-mix(in srgb, var(--color-primary-light) 50%, white);
+  transform: translateY(-3px);
+}
+
+.glass-surface {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.section-title {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+.auth-page {
+  min-height: calc(100vh - 6.5rem);
+  display: flex;
+  align-items: center;
+  padding-block: clamp(1.2rem, 3.5vw, 2.5rem);
+}
+
+.auth-wrap {
+  width: min(980px, 100%);
+  margin-inline: auto;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 960px) {
+  .auth-wrap {
+    grid-template-columns: 0.95fr 1.05fr;
+  }
+}
+
+.auth-highlight {
+  border-radius: var(--radius-xl);
+  padding: clamp(1.4rem, 3vw, 2.4rem);
+  border: 1px solid color-mix(in srgb, var(--color-primary-light) 50%, white);
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--color-primary-soft) 82%, white) 0%,
+    color-mix(in srgb, var(--color-primary-light) 72%, white) 100%
+  );
+  box-shadow: var(--shadow-sm);
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.auth-card {
+  border-radius: var(--radius-xl);
+  padding: clamp(1.2rem, 3vw, 2.1rem);
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.7rem, 1.8vw, 1.2rem);
+}
+
+@media (min-width: 700px) {
+  .product-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1100px) {
+  .product-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.btn-primary {
+  background: var(--gradient-primary);
+  color: var(--color-heading-start);
+  border: 1px solid color-mix(in srgb, var(--color-primary-deep) 35%, white);
+  padding: 10px 24px;
+  border-radius: var(--radius-lg);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  color: var(--color-heading-end);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-primary-light);
+  padding: 10px 24px;
+  border-radius: var(--radius-lg);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.btn-secondary:hover {
+  background: var(--color-primary-soft);
+  color: var(--color-primary-deep);
+}
 
